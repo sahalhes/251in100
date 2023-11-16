@@ -1,1 +1,51 @@
+// Brute 
 
+string reverseString(string &str){
+	
+	int n = str.length();
+	int i=0;
+	string ans="";
+	while(i<n){
+		string temp="";
+		while(str[i]==' '&& i<n) i++;
+		while(str[i]!=' '&& i<n){
+			temp+=str[i];
+			i++;
+		}
+		
+		if(temp.size()>0) {
+			if(ans.size()==0) ans=temp;
+			else ans = temp+" "+ans;
+		}
+	}
+	return ans;	
+}
+
+//Stream 
+
+class Solution {
+public:
+    string reverseWords(string str) {
+        stringstream s(str);
+        string word;
+
+        // to store words.
+        vector<string>temp;
+        // to store the ans.
+        string ans="";
+
+        while(s>>word){
+            temp.push_back(word);
+        }
+        //now store the words in reverse order and add the extra space at the end of eaach word. except the first one.
+
+        for(int i=temp.size()-1;i>=0;i--){
+            if(i!=0)
+            ans+=temp[i]+" ";
+            else
+                ans+=temp[i];
+
+        }
+        return ans;
+    }
+};
