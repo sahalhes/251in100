@@ -1,0 +1,31 @@
+string generate(int n,bool zero){ //checking both 01010 and 1010  
+	string ans="";
+	if(n==0) return ans;
+	if(zero) ans+='0';
+	else ans +='1';
+	while(n!=0){
+		char temp = (ans[ans.size()-1]=='0'?'1':'0');
+		ans+=temp;
+		n--;
+	}
+	return ans;
+}
+
+int difference(string str,string g,int n){
+	int cnt=0;
+	for(int i=0;i<n;i++){
+		if(str[i] !=g[i]) cnt++;
+	}
+	return cnt;
+}
+
+int makeBeautiful(string str) {
+	// Write your code here
+	int n=str.length();
+	string G1= generate(n,true);
+	int diff1 = difference(str,G1,n);
+	string G2 = generate(n,false);
+	int diff2 = difference(str,G2,n);
+	return min(diff1,diff2);
+
+}
