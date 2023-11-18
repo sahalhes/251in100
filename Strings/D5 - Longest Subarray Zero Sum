@@ -1,0 +1,19 @@
+//Hashing 
+#include <bits/stdc++.h>
+
+int LongestSubsetWithZeroSum(vector < int > arr) {
+
+  // Write your code here
+  map<int,int>hash;
+  int maxi=0,sum=0;
+  for(int i=0;i<arr.size();i++){
+    sum = sum + arr[i];
+    if(sum==0) maxi=i+1;
+    else{
+      if(hash.find(sum)!=hash.end()) maxi = max(maxi , i - hash[sum]);
+      else hash[sum]=i;
+    }
+  }
+  return maxi;
+
+}
