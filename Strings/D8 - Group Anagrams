@@ -1,0 +1,24 @@
+//Maps
+
+#include <bits/stdc++.h> 
+vector<vector<string>> getGroupedAnagrams(vector<string> &inputStr, int n)
+{
+    // Write your code here.
+    vector<vector<string>> ans;
+    unordered_map<string,vector<string>> hash; // frequency map , string
+
+    for(auto x: inputStr){
+        string temp = x;
+        sort(x.begin(),x.end());
+        hash[x].push_back(temp);
+    }
+
+    for(auto x: hash){
+        vector<string> temp = x.second; //umap second is vector string
+        ans.push_back(temp);
+
+    }
+    return ans;
+
+     
+}
