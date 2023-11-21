@@ -1,0 +1,16 @@
+//Two pointer 
+#include <bits/stdc++.h> 
+bool isSubSequence(string str1, string str2) {
+    // Write your code here.
+    int i=0;
+    int j=0;
+    while(i<str2.length()){
+        if(str2[i]==str1[j]){
+            j++;
+            if(j==str1.length()) return true;
+        }
+
+        i++;
+    }
+    return false;
+}
