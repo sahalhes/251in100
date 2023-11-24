@@ -1,0 +1,36 @@
+//Brute 
+
+#include <bits/stdc++.h> 
+int pairSum(vector<int> &arr, int n, int target){
+	// Write your code here.
+	int ans=0;
+	for(int i=0;i<n;i++){
+		for(int j=i+1;j<n;j++){
+			if(arr[i]+arr[j]==target) ans++;
+		}
+	}
+	if(ans==0) return -1;
+	return ans;
+}
+
+
+//Optimal 
+
+#include <bits/stdc++.h> 
+int pairSum(vector<int> &arr, int n, int target){
+	// Write your code here.
+	int i=0 , j=n-1 , ans=0;
+
+	while(i<j){
+		if(arr[i]+arr[j]==target){
+			ans++;
+			i++;
+			j--;
+		}
+		else if(arr[i]+arr[j]<target)i++;
+		else j--;
+	}
+	if(ans==0) return -1;
+
+	return ans;
+}
