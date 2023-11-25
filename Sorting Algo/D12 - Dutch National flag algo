@@ -1,0 +1,50 @@
+// sort 0 1 2
+//count and iterate i 0 to f , i f to f+s , i f+s to f+s+to
+#include <bits/stdc++.h> 
+void sort012(int *arr, int n)
+{
+   //   Write your code here
+   int f=0,s=0,t=0;
+   for(int i=0;i<n;i++){
+      if(arr[i]==0) f++;
+      else if(arr[i]==1) s++;
+      else t++;
+   }
+   for(int i=0;i<f;i++){
+      arr[i]=0;  
+   }
+   for(int i=f;i<f+s;i++){
+      arr[i]=1; 
+   }
+   for(int i=f+s;i<f+s+t;i++){
+      arr[i]=2; 
+   }
+
+}
+
+//dutch 
+
+#include <bits/stdc++.h> 
+void sortArray(vector<int>& arr, int n)
+{
+    // Write your code here
+    int l=0; //before this all 0
+    int m=0; //mover
+    int h=n-1;//after this all 2
+    while(m<=h){
+        int x = arr[m];
+
+        if(x==0){
+            swap(arr[l],arr[m]);
+            l++;
+            m++;
+        }
+        else if(x==1){
+            m++;
+        }
+        else{
+            swap(arr[h],arr[m]);
+            h--;
+        }
+    }
+}

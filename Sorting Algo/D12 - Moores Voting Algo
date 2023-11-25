@@ -1,0 +1,16 @@
+// >floor n/3 or n/2
+// to find majority element 
+
+#include <bits/stdc++.h>
+
+int findMajorityElement(int arr[], int n) {
+	// Write your code here.
+	map<int,int>hash;
+	for(int i=0;i<n;i++){
+		hash[arr[i]]++;
+	}
+	for(const auto&pair:hash){
+		if(pair.second>n/2) return pair.first;
+	}
+	return -1;
+}
