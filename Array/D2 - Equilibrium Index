@@ -1,0 +1,29 @@
+//Brute
+
+
+
+//Better
+
+#include <bits/stdc++.h> 
+int findEquilibriumIndex(vector<int> &arr) {
+    // Write your code here.
+    int n = arr.size();
+    if(n==1) return arr[0];
+    if(n==2) return -1;
+
+    vector<int> sumarr;
+    int sum=0;
+    for(int i=0;i<n;i++){
+        sum += arr[i];
+        sumarr.push_back(sum);
+    }
+
+    for(int i=0;i<n;i++){
+        int lsum = sumarr[i]-arr[i];
+        int rsum = sumarr[n-1]-sumarr[i];
+        if(lsum==rsum) return i;
+    }
+
+    return -1;
+    
+}
