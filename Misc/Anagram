@@ -1,0 +1,36 @@
+// hash approach 
+
+#include <bits/stdc++.h> 
+bool areAnagram(string &str1, string &str2){
+    // Write your code here.
+    map<char,int>hash1;
+    map<char,int>hash2;
+    if(str1.length() != str2.length()) return false;
+    for(int i=0;i<str1.length();i++){
+        hash1[str1[i]]++;
+    }
+    for(int i=0;i<str2.length();i++){
+        hash2[str2[i]]++;
+    }
+
+    if(hash1==hash2) return true;
+    return false;
+}
+
+// vector optimal
+
+#include <bits/stdc++.h> 
+bool areAnagram(string &str1, string &str2){
+    // Write your code here.
+    vector<int> v1(26,0) , v2(26,0);
+    if(str1.length() != str2.length()) return false;
+    for(int i=0;i<str1.length();i++){
+        v1[str1[i]-'a']++;
+    }
+    for(int i=0;i<str2.length();i++){
+        v2[str2[i]-'a']++;
+    }
+    if(v1==v2) return true;
+    return false;
+}
+
