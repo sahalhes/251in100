@@ -1,0 +1,15 @@
+ #include <bits/stdc++.h> 
+vector<int> rotateMatRight(vector<vector<int>> mat, int n, int m, int k) {
+	// Write your code here.
+	k = k%m;
+	vector<int> ans; // transpose and reverse column ans;
+	for(int i=0; i<n; i++){
+		reverse(mat[i].begin(), mat[i].end());
+		reverse(mat[i].begin(), mat[i].begin()+k);
+		reverse(mat[i].begin()+k, mat[i].end());
+
+		for(int j=0; j<m; j++) ans.push_back(mat[i][j]);
+	}
+
+	return ans;
+}
