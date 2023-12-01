@@ -1,0 +1,29 @@
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+int maxSubarraySum(vector<int> &arr, int n) {
+    // Write your code here.
+    if (n == 0) {
+        return 0;
+    }
+
+    int globalMax = arr[0], currMax = arr[0];
+    int globalMin = arr[0], currMin = arr[0];
+    int total = arr[0];
+
+    for (int i = 1; i < n; ++i) {
+        total += arr[i];
+        currMax = max(arr[i], currMax + arr[i]);
+        currMin = min(arr[i], currMin + arr[i]);
+        globalMax = max(globalMax, currMax);
+        globalMin = min(globalMin, currMin);
+    }
+
+    if (globalMax > 0) {
+        return max(globalMax, total - globalMin);
+    } else {
+        return globalMax;
+    }
+}

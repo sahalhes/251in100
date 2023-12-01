@@ -1,0 +1,33 @@
+//Kadane
+
+long long kadane(vector<int> arr){
+    int n=arr.size(); //kadane's algorithm 
+    long long sum=0;
+    long long maxi=LONG_LONG_MIN;
+    for(int i=0; i<n; i++){
+        if (sum<0){ sum=0; }
+        sum+=arr[i];
+        maxi=max(maxi,sum);
+    }
+    return maxi;
+}
+
+long long maxSubSumKConcat(vector<int> &arr, int n, int k)
+{
+    if (k==1) { return kadane(arr); }
+  
+     long long arrsum=0;
+     vector<int>arr2(n*2);   //create two copies of array
+     for(int i=0; i<n; i++){
+         arrsum+=arr[i];
+         arr2[i]=arr[i];
+         arr2[i+n]=arr[i];
+     }
+    
+     if (arrsum<0){
+        return kadane(arr2);
+    }
+    else {
+        return kadane(arr2)+(k-2)*arrsum;
+    }
+}
