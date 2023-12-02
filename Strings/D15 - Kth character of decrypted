@@ -1,0 +1,24 @@
+//Q1 where ab12c3 is considered as abbbbb...c 
+
+char kThCharaterOfDecryptedString(string s, long long k) {
+    char result = 0;
+
+    for (char c : s) {
+        if (isdigit(c)) {
+            long long repeat = c - '0';
+            k %= repeat;  // Update k based on the repetition count
+        } else {
+            if (k == 0) {
+                result = c;
+                break;
+            }
+            k--;  // Move one step forward in the decrypted string
+        }
+    }
+
+    return result;
+}
+
+
+//Q2 where ab12c3 is considered as abababab..c
+
