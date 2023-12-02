@@ -1,0 +1,40 @@
+#include <bits/stdc++.h> 
+    // Write your code here.
+    vector<vector<int>> sumOfKxKMatrices(vector<vector<int>> &arr, int k){
+      int n = arr.size();
+    
+     if(k == 1)return arr;
+
+    vector<vector<int>>ans(n-k+1);
+
+    for(int i = 0 ; i<n ; i++){
+        int sum = 0;
+        for (int j = 0; j < n; j++) {
+          sum += arr[i][j];
+
+          arr[i][j] = sum;
+          // cout<<arr[i][j]<<" ";
+        }
+    }
+
+      int m = 0;
+
+     while(m<=n-k){
+      int j = k-1 ;
+     for(; j<n ;j++){
+         int sum = 0;
+         for(int i = 0+m ; i<k+m ;i++){
+             if(j-k>=0){
+             sum+=(arr[i][j] - arr[i][j-k]);
+             }
+             else{
+                  sum+=arr[i][j];
+             }
+         }
+       ans[m].push_back(sum);
+     } 
+   m++;
+   }
+     return ans;
+}
+
