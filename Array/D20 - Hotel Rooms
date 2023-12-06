@@ -24,3 +24,29 @@ string maxRoomBooked(vector<string> arr, int n) {
     return ans;
 }
 
+//Hashing
+#include <bits/stdc++.h>
+
+string maxRoomBooked(vector<string> arr, int n) {
+    // Write your code here.
+    sort(arr.begin(),arr.end());
+    map<string,char>hash;
+    string ans=arr[0];
+    int maxi = 0;
+    for(int i=0;i<n;i++){
+        hash[arr[i]]++;
+    }
+
+    for(auto pair:hash){
+        if(pair.second>maxi){
+            maxi=pair.second;
+            ans=pair.first;
+        }
+    }
+    if(ans[0]=='+') ans.erase(remove(ans.begin(), ans.end(), '+'), ans.end());
+    else  ans.erase(remove(ans.begin(), ans.end(), '-'), ans.end());
+
+    return ans;
+}
+
+
