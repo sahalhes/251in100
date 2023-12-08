@@ -1,0 +1,37 @@
+void spiralPrint(int **input, int nRows, int nCols)
+{
+    // Write your code here
+    int top = 0, left = 0;
+    int bottom = nRows - 1, right = nCols - 1;
+    while (top <= bottom && left <= right)
+    {
+        for (int i = left; i <= right; i++)
+        {
+            cout << input[top][i]<<" "; // Use 'i' instead of 'left'
+        }
+        top++;
+        for (int i = top; i <= bottom; i++)
+        {
+            cout << input[i][right]<<" "; // Use 'i' instead of 'top'
+        }
+        right--;
+        // Check if there is a need to print in the current direction
+        if (top <= bottom)
+        {
+            for (int i = right; i >= left; i--)
+            {
+                cout << input[bottom][i]<<" "; // Use 'i' instead of 'right'
+            }
+            bottom--;
+        }
+        // Check if there is a need to print in the current direction
+        if (left <= right)
+        {
+            for (int i = bottom; i >= top; i--)
+            {
+                cout << input[i][left]<<" "; // Use 'i' instead of 'bottom'
+            }
+            left++;
+        }
+    }
+}
