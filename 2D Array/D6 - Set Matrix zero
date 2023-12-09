@@ -1,0 +1,199 @@
+//Brute
+#include <bits/stdc++.h>
+
+void markrow (int row , vector<vector<int>>&matrix,int n, int m){
+
+    for(int i=0; i<m; i++){
+
+        if(matrix[row][i]!=0){
+
+            matrix[row][i] = -1;
+
+        }
+    }    
+}
+
+void markcol (int col , vector<vector<int>>&matrix,int n,int m){
+
+    for(int i=0;i<n;i++){
+        if(matrix[i][col]!=0){
+            matrix[i][col] =-1;
+        }
+    }
+
+}
+
+void setZeros(vector<vector<int>> &matrix)
+
+{
+
+    // Write your code here.
+    int n = matrix.size();
+    int m = matrix[0].size();
+
+    for(int i=0; i<n; i++){
+        for(int j=0; j<m; j++){
+            if(matrix[i][j] == 0){
+                markrow(i , matrix,n,m);
+                markcol(j , matrix,n,m);
+            }
+        }
+    }
+
+    for(int i=0; i<n; i++){
+        for(int j=0; j<m; j++){
+            if(matrix[i][j] == -1){
+                matrix[i][j] = 0;
+            }
+        }
+    }
+}
+
+//Better - create dummy array
+#include <bits/stdc++.h>
+
+void setZeros(vector<vector<int>> &matrix)
+{
+	// Write your code here.
+	int n = matrix.size();
+	int m = matrix[0].size();
+	int row[n]={0};
+	int col[m]={0};
+
+	for(int i=0;i<n;i++){
+		for(int j=0;j<m;j++){
+			if(matrix[i][j]==0){
+				row[i]=1;
+				col[j]=1;
+			}
+		}
+	}
+	for(int i=0;i<n;i++){
+		for(int j=0;j<m;j++){
+			if(row[i] || col[j]) {
+				matrix[i][j]=0;
+			}
+		}
+	}
+}
+//Optimal - create dummy array within the array (no extra space)
+
+void setZeros(vector<vector<int>>& matrix) {
+  int m = matrix.size(), n = matrix[0].size();
+  bool rowZero = false, colZero = false;
+
+  // Check if first row or column has zero
+  for (int i = 0; i < m; ++i) {
+    if (matrix[i][0] == 0) {
+      colZero = true;
+      break;
+    }
+  }
+
+  for (int j = 0; j < n; ++j) {
+    if (matrix[0][j] == 0) {
+      rowZero = true;
+      break;
+    }
+  }
+
+  // Mark 0s in first row and column for later processing
+  for (int i = 1; i < m; ++i) {
+    for (int j = 1; j < n; ++j) {
+      if (matrix[i][j] == 0) {
+        matrix[0][j] = 0;
+        matrix[i][0] = 0;
+      }
+    }
+  }
+
+  // Set remaining elements to zero based on first row and column
+  for (int i = 1; i < m; ++i) {
+    if (matrix[i][0] == 0) {
+      for (int j = 1; j < n; ++j) {
+        matrix[i][j] = 0;
+      }
+    }
+  }
+
+  for (int j = 1; j < n; ++j) {
+    if (matrix[0][j] == 0) {
+      for (int i = 1; i < m; ++i) {
+        matrix[i][j] = 0;
+      }
+    }
+  }
+
+  // Set first row and column to zero if necessary
+  if (rowZero) {
+    for (int j = 0; j < n; ++j) {
+      matrix[0][j] = 0;
+    }
+  }
+
+  if (colZero) {
+    for (int i = 0; i < m; ++i) {
+      matrix[i][0] = 0;
+    }
+  }
+}
+void setZeros(vector<vector<int>>& matrix) {
+  int m = matrix.size(), n = matrix[0].size();
+  bool rowZero = false, colZero = false;
+
+  // Check if first row or column has zero
+  for (int i = 0; i < m; ++i) {
+    if (matrix[i][0] == 0) {
+      colZero = true;
+      break;
+    }
+  }
+
+  for (int j = 0; j < n; ++j) {
+    if (matrix[0][j] == 0) {
+      rowZero = true;
+      break;
+    }
+  }
+
+  // Mark 0s in first row and column for later processing
+  for (int i = 1; i < m; ++i) {
+    for (int j = 1; j < n; ++j) {
+      if (matrix[i][j] == 0) {
+        matrix[0][j] = 0;
+        matrix[i][0] = 0;
+      }
+    }
+  }
+
+  // Set remaining elements to zero based on first row and column
+  for (int i = 1; i < m; ++i) {
+    if (matrix[i][0] == 0) {
+      for (int j = 1; j < n; ++j) {
+        matrix[i][j] = 0;
+      }
+    }
+  }
+
+  for (int j = 1; j < n; ++j) {
+    if (matrix[0][j] == 0) {
+      for (int i = 1; i < m; ++i) {
+        matrix[i][j] = 0;
+      }
+    }
+  }
+
+  // Set first row and column to zero if necessary
+  if (rowZero) {
+    for (int j = 0; j < n; ++j) {
+      matrix[0][j] = 0;
+    }
+  }
+
+  if (colZero) {
+    for (int i = 0; i < m; ++i) {
+      matrix[i][0] = 0;
+    }
+  }
+}
+
