@@ -17,4 +17,4 @@ int firstMissing(int arr[], int n)
         if(arr[i]>0) return i+1;
     }
     return n+1;
-}
+} 
