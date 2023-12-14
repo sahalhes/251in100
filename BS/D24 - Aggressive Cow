@@ -1,0 +1,37 @@
+#include<bits/stdc++.h>
+
+bool check(int n, int k, vector<int> &stalls,long long distance){
+        int cnt=1;
+        long long last=stalls[0];
+        
+        for(int i=1;i<n;i++){
+            if(stalls[i]-last>=distance){
+                last=stalls[i];
+                cnt++;
+            }
+            if(cnt>=k) return true;
+        }
+        return false;
+    }
+
+int aggressiveCows(vector<int> &stalls, int k)
+{
+    //    Write your code here.
+    sort(stalls.begin(),stalls.end());
+    int n = stalls.size();
+
+    long long low=0;
+    long long high=stalls[n-1]-stalls[0];    
+    int ans=-1;
+    while(low<=high){
+        long long mid= low + (high-low)/2;
+        
+        if(check(n,k,stalls,mid)){
+            ans=mid;
+            low=mid+1;
+        }
+        else high=mid-1;
+        
+    }
+    return ans;
+}
