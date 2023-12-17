@@ -1,0 +1,16 @@
+
+bool finder(int n, long long int k){
+	if(n==1) return 0;
+	if(n==2) return k&1?0:1;
+
+	bool ans=finder(n-1,(k+1)/2);
+	if(k&1) return ans;
+	return !ans;
+}
+
+string kthChildNthGeneration(int n, long long int k)
+{
+	// Write your code here	
+	if (finder(n,k)) return "Female";
+	return "Male";
+}

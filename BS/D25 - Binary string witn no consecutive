@@ -1,0 +1,42 @@
+//Brute
+vector<string> generateString(int N) {
+    // Write your code here.
+    vector<string> res = {"0", "1"};
+    
+    for(int i = 1; i < N; ++i) {
+        vector<string> temp = res;
+        res.clear();
+        for(auto x: temp) {
+            if(x.back() == '0'){
+                res.push_back(x + '0');
+                res.push_back(x + '1');
+            }
+            else{
+                res.push_back(x + '0');
+            }
+        }
+    }
+    return res; 
+}
+//Recursive 
+void rec(vector<string> &a,int n,string s){
+
+    if(s.size()==n){
+        a.push_back(s);
+        return;
+    }
+    rec(a,n,s+'0');
+    if(s[s.size()-1]=='0' || s.size()==0){
+        rec(a,n,s+'1');
+
+    }
+}
+
+vector<string> generateString(int n) {
+
+    // Write your code here.
+
+    vector<string> res;
+    rec(res,n,"");
+
+    
