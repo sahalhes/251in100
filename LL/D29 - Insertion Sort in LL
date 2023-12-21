@@ -1,0 +1,44 @@
+#include <bits/stdc++.h> 
+/****************************************************************
+    Following is the Linked List node structure
+
+    class Node
+    {
+    public:
+        int data;
+        Node *next;
+        Node(int data)
+        {
+            this->data = data;
+            this->next = NULL;
+        }
+    };
+
+*****************************************************************/
+struct Node* sorted=NULL;
+
+Node* sortedMerge(Node* a, Node* b) {
+  if (!a) return b; //if a is empty return b 
+  if (!b) return a;
+  if (a->data <= b->data) {
+    a->next = sortedMerge(a->next, b); //add a to front of sorted and do merge again
+    return a;
+  } else {
+    b->next = sortedMerge(a, b->next);
+    return b;
+  }
+}
+
+Node* insertionSortLL(Node* head)
+ 
+{
+  if (!head) return head;
+  Node* sorted = nullptr;
+  while (head) {
+    Node* next = head->next;
+    head->next = nullptr; // detach from original and merge it in next line
+    sorted = sortedMerge(sorted, head);
+    head = next;//next as we stored 
+  }
+  return sorted;
+}
