@@ -1,0 +1,56 @@
+class Queue {
+    int* arr;     // Pointer to the array
+    int size;     // Maximum size of the queue
+    int qfront;   // Front index of the queue
+    int rear;     // Rear index of the queue
+public:
+    Queue() {
+        size = 10001;        // Maximum size set to 10001
+        arr = new int[size];  // Dynamic allocation of memory for the array
+        qfront = 0;           // Initializing front index
+        rear = 0;             // Initializing rear index
+    }
+
+    /*----------------- Public Functions of Queue -----------------*/
+
+    bool isEmpty() {
+        // Checking if front and rear are the same, indicating an empty queue
+        if (qfront == rear)
+            return true;
+        else
+            return false;
+    }
+
+    void enqueue(int data) {
+        // Checking if the rear has reached the maximum size
+        if (rear == size)
+            return;   // If yes, do nothing (overflow condition)
+        else {
+            arr[rear++] = data;   // Otherwise, add the data at the rear index and increment rear
+        }
+    }
+
+    int dequeue() {
+        // Checking if front and rear are the same, indicating an empty queue
+        if (qfront == rear)
+            return -1;  // If yes, return -1 (underflow condition)
+        else {
+            int ans = arr[qfront];  // Store the front element in 'ans'
+            arr[qfront++] = -1;     // Set the front element to -1 (for visualization, actual removal)
+            // If front and rear become the same after dequeue, reset them to initial values
+            if (qfront == rear) {
+                qfront = 0;
+                rear = 0;
+            }
+            return ans;   // Return the stored front element
+        }
+    }
+
+    int front() {
+        // Checking if front and rear are the same, indicating an empty queue
+        if (qfront == rear)
+            return -1;  // If yes, return -1 (underflow condition)
+        else
+            return arr[qfront];  // Otherwise, return the front element
+    }
+};

@@ -1,0 +1,45 @@
+class Stack {
+public:
+    Stack(int capacity) {
+        this->capacity = capacity;
+        arr = new int[capacity];
+        top_index = -1;  // Rename variable to avoid conflict
+    }
+
+    void push(int num) {
+        if (isFull()) {
+            // Handle stack overflow
+            return;
+        }
+        arr[++top_index] = num;  // Use top_index variable
+    }
+
+    int pop() {
+        if (isEmpty()) {
+            // Handle stack underflow
+            return -1;
+        }
+        return arr[top_index--];
+    }
+
+    int top() {
+        if (isEmpty()) {
+            // Handle empty stack
+            return -1;
+        }
+        return arr[top_index];
+    }
+
+    int isEmpty() {
+        return top_index == -1;
+    }
+
+    int isFull() {
+        return top_index == capacity - 1;
+    }
+
+private:
+    int capacity;
+    int *arr;
+    int top_index;  // Renamed variable
+};
