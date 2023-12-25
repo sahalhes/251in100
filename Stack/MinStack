@@ -1,0 +1,57 @@
+// top means return stack1.top and minimum means return s2.top and while pushing and poping modiy s2 if required
+
+#include <bits/stdc++.h> 
+// Implement class for minStack.
+class minStack
+{
+	// Write your code here.
+	
+	public:
+		
+		// Constructor
+
+		stack<int> st,s2;
+		minStack() 
+		{ 
+			// Write your code here.
+		}
+		
+		// Function to add another element equal to num at the top of stack.
+		void push(int num)
+		{
+			// Write your code here.
+			if(s2.empty()|| num<=s2.top()){
+				s2.push(num);
+			}
+			st.push(num);
+		}
+		
+		// Function to remove the top element of the stack.
+		int pop()
+		{
+			// Write your code here.
+			if(st.empty()) return -1;
+			if(st.top()==s2.top()){
+				s2.pop();
+			}
+			int ans= st.top();
+			st.pop();
+			return ans;
+		}
+		
+		// Function to return the top element of stack if it is present. Otherwise return -1.
+		int top()
+		{
+			// Write your code here.
+			if(st.empty()) return -1;
+			return st.top();
+		}
+		
+		// Function to return minimum element of stack if it is present. Otherwise return -1.
+		int getMin()
+		{
+			// Write your code here.
+			if(s2.empty()) return -1;
+			return s2.top();
+		}
+};
