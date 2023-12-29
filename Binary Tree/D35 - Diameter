@@ -1,0 +1,38 @@
+//Height 
+
+int heightOfBinaryTree(TreeNode<int> *root)
+{
+	// Write your code here.
+    if(!root) return 0;
+    int l=heightOfBinaryTree(root->left);
+    int r=heightOfBinaryTree(root->right);
+    return 1+max(l,r);
+}
+
+
+//Diameter
+
+int height (TreeNode<int> *root,int& Diameter)
+{
+    if(!root) return 0;
+    //
+    int lh=height(root->left,Diameter);
+    int rh=height(root->right,Diameter);
+    //har node p hi Diameter find kr lo
+    int currDiameter=lh+rh; //FASTEST WAY
+    Diameter=max(Diameter,currDiameter);
+
+    //return height
+    return max(lh,rh)+1;
+}
+
+
+int diameterOfBinaryTree(TreeNode<int>* root) {
+    // code here
+    int Diameter=0;
+    height(root,Diameter);
+    return Diameter;
+}
+
+
+

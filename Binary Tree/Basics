@@ -1,0 +1,93 @@
+//At most 2 children
+//real life folder
+
+class Node{
+    int key;
+    Node* left;
+    Node* right;
+    Node(int x){
+        key=x;
+        left=right=NULL;
+    }
+}
+
+//Tree traversal 
+
+//BFS - Breadth first search (level order)
+//DFS = Depth first search (inorder preorder postorder)
+
+//DFS 
+/*
+LR always together
+Pre - NLR
+In  - LNR
+Post - LRN
+*/
+
+//Inorder
+void inorder(Node* root){
+    if(root!=NULL){
+        inorder(root->left);
+        cout<<root->key<<endl;
+        inorder(root->right);
+    }
+}
+//Preorder
+void preorder(Node* root){
+    if(root!=NULL){
+        cout<<root->key<<endl;
+        inorder(root->left);
+        inorder(root->right);
+    }
+}
+//Postrder
+void posorder(Node* root){
+    if(root!=NULL){
+        inorder(root->left);
+        inorder(root->right);
+        cout<<root->key<<endl;
+    }
+}
+//Levelorder
+
+//Use queue  FIFO characteristic
+
+//#1
+
+void level(Node *root,vector<int> &ans){
+    if(root==NULL) return;
+    queue<Node*> q;
+    q.push(root);
+    while(!q.empty()){
+        Node*temp=q.front();
+        q.pop();
+        ans.push_back(temp->val);
+        if(temp->left !=NULL) q.push(temp->left);
+        if(temp->right !=NULL) q.push(temp->right);
+    }
+
+}
+
+//#2 
+
+void level(Node *root,vector<vector<int>>&ans;){
+    if(root==NULL) return ans;
+    queue<Node*> q;
+    q.push(root);
+    while(1){
+        int size = q.size();
+        if(size==0) return ans;
+        vector<int> data;
+        while(size>0){
+            Node* temp = q.front();
+            q.pop();
+            data.push_back(temp->val);
+            if(temp->left!=NULL) q.push(temp->left);
+            if(temp->right!=NULL) q.push(temp->right);
+            size--;
+        }
+        ans.push_back(data);
+    }
+
+}
+

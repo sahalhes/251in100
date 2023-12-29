@@ -1,0 +1,44 @@
+//brute
+#include <bits/stdc++.h> 
+queue<int> reverseQueue(queue<int> q)
+{
+    // Write your code here.
+    stack<int> temp;
+    queue<int> ans;
+
+    int n = q.size();
+
+    while(!q.empty()){
+        temp.push(q.front());
+        q.pop();
+    }
+
+    while(!temp.empty()){
+        ans.push(temp.top());
+        temp.pop();
+    }
+
+    return ans;
+
+}
+//optimal
+#include <bits/stdc++.h> 
+
+void rec(queue<int> &q){
+    if(q.empty()) return;
+
+    int d = q.front();
+    q.pop();
+    rec(q);
+    q.push(d);
+
+}
+
+queue<int> reverseQueue(queue<int> q)
+{
+    // Write your code here.
+    rec(q);
+    return q;
+
+}
+
