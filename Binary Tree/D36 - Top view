@@ -1,0 +1,36 @@
+vector<int> getTopView(TreeNode<int> *root)
+{
+    // Write your code here.
+    vector<int> ans;
+    if (root == NULL) return ans;
+
+    // Store nodes and vertical levels in the queue
+    queue<pair<TreeNode<int> *, int>> q;
+    q.push({root, 0});  // Enqueue root with level 0
+
+    map<int, int> nodeMap;  // Map to store first node at each level
+
+    while (!q.empty()) {
+        auto [node, level] = q.front();
+        q.pop();
+
+        // Store only if level is not yet encountered
+        if (!nodeMap.count(level)) {
+            nodeMap[level] = node->data;
+        }
+
+        // Enqueue children with adjusted levels
+        if (node->left) {
+            q.push({node->left, level - 1});
+        }
+        if (node->right) {
+            q.push({node->right, level + 1});
+        }
+    }
+
+    // Collect nodes in level order from the map
+    for (auto [level, data] : nodeMap) {
+        ans.push_back(data);
+    }
+
+  
