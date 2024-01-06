@@ -1,0 +1,48 @@
+//deletion
+// Node can be leaf,one child (copy child to node and delete),
+two children (inorder successor of node)
+
+BinaryTreeNode<int>* findMinimum(BinaryTreeNode<int>* root) {
+    if (root == NULL) {
+        return NULL;
+    }
+    while (root->left != NULL) {
+        root = root->left;
+    }
+    return root;
+}
+
+BinaryTreeNode<int>* bstDelete(BinaryTreeNode<int>* root, int key) {
+    // Write your code here
+    if (root == NULL) {
+        return NULL;
+    }
+    if (root->data == key) {
+        if (root->left == NULL && root->right == NULL) { //leaf case
+            delete root;
+            return NULL;
+        }
+        if (root->left != NULL && root->right == NULL) { //one child case
+            BinaryTreeNode<int>* temp = root->left;
+            delete root;
+            return temp;
+        }
+        if (root->left == NULL && root->right != NULL) { //one child case
+            BinaryTreeNode<int>* temp = root->right;
+            delete root;
+            return temp;
+        }
+        if (root->left != NULL && root->right != NULL) {
+            BinaryTreeNode<int>* minimum = findMinimum(root->right);
+            root->data = minimum->data;
+            root->right = bstDelete(root->right, minimum->data);
+            return root;
+        }
+    } else if (root->data > key) {
+        root->left = bstDelete(root->left, key);
+    } else {
+        root->right = bstDelete(root->right, key);
+    }
+
+    return root;
+}
