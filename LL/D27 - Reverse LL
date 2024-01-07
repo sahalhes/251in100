@@ -29,7 +29,7 @@ LinkedListNode<int> *reverseLinkedList(LinkedListNode<int> *head) {
     }
     return prevNode;
 }
-
+//ncpcn
 // nn = curr->next
 //curr->next=prev
 //prev = curr

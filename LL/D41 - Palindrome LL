@@ -1,0 +1,55 @@
+//naive
+bool isPalindrome(LinkedListNode<int> *head) {
+    // Write your code here.
+    vector<int> ans;
+    while(head!=NULL){
+        ans.push_back(head->data);
+        head = head->next;
+    }
+    vector<int> ans2 = ans;
+    reverse(ans2.begin(),ans2.end());
+    if(ans==ans2) return true;
+    return false;
+}
+
+//better
+/*step 1 - mid  (tortoise and hare)
+step 2 - reverse the LL after mid (make sure to make it in original form after reverse , data altering bad)
+step 3 - use head and tail pointers to compare
+*/
+
+LinkedListNode<int>* reverse(LinkedListNode<int> *head){
+    LinkedListNode<int> *curr = head, *prevNode = NULL, *nextNode = NULL;
+    while(curr){
+        nextNode = curr->next;
+        curr->next = prevNode;
+        prevNode = curr;
+        curr = nextNode;
+    }
+    return prevNode;
+
+}
+bool isPalindrome(LinkedListNode<int> *head) {
+    // Write your code here.
+    if(head==NULL || head->next==NULL) return true;
+    LinkedListNode<int> *slow = head;
+    LinkedListNode<int> *fast = head;
+    while(fast->next!=NULL && fast->next->next!=NULL ){
+        slow=slow->next;
+        fast=fast->next->next;
+    }
+    LinkedListNode<int> * newhead = reverse(slow->next);
+    LinkedListNode<int> * first=head;
+    LinkedListNode<int> * second=newhead;
+
+    while(second!=NULL){
+        if(first->data!=second->data){
+            reverse(newhead); //prevent data alter
+            return false;
+        }
+        first=first->next;
+        second=second->next;
+    }
+    reverse(newhead); //prevent data alter
+    return true;
+}
