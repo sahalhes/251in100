@@ -1,0 +1,35 @@
+#include <bits/stdc++.h> 
+
+Node<int>* rev(Node<int>*head){
+    Node<int>*curr=head,*nextnode=head,*prevnode=NULL;
+    while(curr){
+       nextnode=curr->next;
+       curr->next=prevnode;
+       prevnode=curr;
+       curr=nextnode;
+    }
+    return prevnode;
+}
+Node<int>* rearrangeList(Node<int>* h){
+    if(h==NULL or h->next == NULL or h->next->next ==NULL)return h;
+
+    Node<int>*f=h,*s=h,*temp1,*d,*temp2,*ans;
+    while(f->next && f->next->next){
+        f=f->next->next;
+        s=s->next;
+    } // 10 20 30 40 
+
+    d=rev(s->next);
+    s->next=NULL;
+    ans=h;
+    while(d && h){
+        temp2 = d->next;    
+        temp1 = h->next;
+        h->next=d;
+        d->next=temp1;
+        h=temp1;
+        d=temp2;
+    }
+    if(d)h->next=d;
+    return ans;
+}

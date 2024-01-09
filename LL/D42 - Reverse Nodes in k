@@ -1,0 +1,101 @@
+void reverseStack(stack<int>&s,int item){
+
+    if(s.empty()){
+
+        s.push(item);
+
+        return;
+
+    }
+
+    int top=s.top();
+
+    s.pop();
+
+    reverseStack(s,item);
+
+    s.push(top);
+
+}
+
+void reverse(Node*head,Node*tail,stack<int>&s){
+
+    if(head==tail){
+
+        reverseStack(s,head->data);
+
+        head->data=s.top();
+
+        s.pop();
+
+        return ;
+
+    }
+
+    reverseStack(s,head->data);
+
+    reverse(head->next,tail,s);
+
+    head->data=s.top();
+
+    s.pop();
+
+    return;
+
+}
+
+ 
+
+Node *getListAfterReverseOperation(Node *head, int n, int b[]){
+
+    // Write your code here.
+
+    if(head==NULL || head->next==NULL) return head;
+
+    int i=0;
+
+    stack<int>s;
+
+    Node*head1=head;
+
+    Node*tail1=head;
+
+    while(tail1!=NULL && i<n){
+
+        int j=0;
+
+        while(j<b[i]-1 && tail1->next!=NULL){
+
+                tail1=tail1->next;
+
+            j++;
+
+        }
+
+        reverse(head1,tail1,s);
+
+        if(tail1->next==NULL){
+
+            return head;
+
+        }
+
+        else{
+
+            if(b[i]!=0){
+
+            head1=tail1->next;
+
+            tail1=head1;
+
+            }
+
+        }
+
+        i++;
+
+    }
+
+    return head;
+
+}
