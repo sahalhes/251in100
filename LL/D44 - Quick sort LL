@@ -1,0 +1,61 @@
+#include <bits/stdc++.h> 
+/****************************************************************
+
+    Following is the class structure of the Node class:
+
+        class Node
+        {
+        public:
+	        int data;
+	        Node *next;
+	        Node(int data)
+	        {
+		        this->data = data;
+		        this->next = NULL;
+	        }
+        };
+
+*****************************************************************/
+
+Node *quickSortLL(Node *head)
+{
+    // Write your code here.
+	if (head == NULL || head->next == NULL) {
+        return head; // Base case: empty or single-node list is already sorted
+    }
+
+    // Partition the list into two sublists:
+    Node *pivot = head;
+    Node *left = NULL, *right = NULL;
+    Node *curr = head->next;
+
+    while (curr != NULL) {
+        Node *next = curr->next;
+        if (curr->data < pivot->data) {
+            curr->next = left;
+            left = curr;
+        } else {
+            curr->next = right;
+            right = curr;
+        }
+        curr = next;
+    }
+
+    // Recursively sort the sublists:
+    left = quickSortLL(left);
+    right = quickSortLL(right);
+
+    // Merge the sorted sublists and pivot:
+    if (left != NULL) {
+        head = left;
+        while (left->next != NULL) {
+            left = left->next;
+        }
+        left->next = pivot;
+    } else {
+        head = pivot;
+    }
+    pivot->next = right;
+
+    return head;
+}

@@ -15,4 +15,4 @@ void flattenBinaryTree(TreeNode<int>* root)
         }
         current = current -> right;
     }
-}
+}  
