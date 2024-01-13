@@ -1,0 +1,80 @@
+#include<bits/stdc++.h>
+class myHashMap 
+{   
+    public:
+    vector<pair<string,int>>v;
+
+
+    myHashMap() 
+    {
+        // Write your code here.
+    }
+
+    void insert(string key, int value) 
+    {
+        // Write your code here.
+        for(auto& i:v){
+
+            if(i.first==key){
+
+                i.second=value;
+
+                return;
+
+            }
+
+        }
+        v.push_back({key,value});
+    }
+
+    bool search(string key) 
+    {
+        // Write your code here.
+        for(const auto i:v){
+
+            if(i.first==key)return true;
+
+        }
+
+        return false;
+    }
+
+    int get(string key) 
+    {
+        // Write your code here.
+        for(auto i:v){
+            if(i.first==key) return i.second;
+        }
+        return -1;
+    }
+
+    void remove(string key) 
+    {
+        // Write your code here.
+        for (auto it = v.begin(); it != v.end(); ++it) {
+
+        if (it->first == key) {
+
+            v.erase(it);
+
+            return;
+
+        }
+
+    }
+    }
+
+    int getSize() 
+    {
+        // Write your code here.
+     return v.size();
+
+
+    }
+
+    bool isEmpty() 
+    { 
+        // Write your code here.
+        return v.empty();
+    }
+};

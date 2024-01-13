@@ -1,0 +1,70 @@
+#include <bits/stdc++.h>
+
+bool isLeaf(TreeNode<int> *node) {
+    return node->left == NULL && node->right == NULL;
+}
+
+void leafi(TreeNode<int> *root,vector<int>&ans){
+
+    if(isLeaf(root)) {
+
+      ans.push_back(root->data);
+
+      return;
+
+    }
+
+    if(root->left) leafi(root->left,ans);
+
+    if(root->right) leafi(root->right,ans);
+
+}
+
+void righti(TreeNode<int> *root,vector<int>&ans){
+
+    if(!root || isLeaf(root))return;
+
+    if(root->right)righti(root->right, ans);
+
+    else if(root->left) righti(root->left, ans);
+
+    ans.push_back(root->data);
+
+}
+
+void lefti(TreeNode<int> *root,vector<int>&ans){
+
+    if(!root || isLeaf(root))return;
+
+    ans.push_back(root->data);
+
+    if(root->left) lefti(root->left, ans);
+
+    else if(root->right) lefti(root->right, ans);
+
+}
+
+vector<int> traverseBoundary(TreeNode<int> *root){
+
+    vector<int>ans;
+
+    if(!root)return ans;
+
+    ans.push_back(root->data);
+
+    if(isLeaf(root)) return ans;
+
+    if(root->left)lefti(root->left, ans);
+
+    leafi(root, ans);
+
+    if(root->right)righti(root->right, ans);
+
+    return ans;
+
+}
+
+ 
+
+ 
+

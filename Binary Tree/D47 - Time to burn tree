@@ -1,0 +1,135 @@
+void markChildToParent(BinaryTreeNode<int>* root, unordered_map<BinaryTreeNode<int>*,pair<BinaryTreeNode<int>*,bool>> &mp){
+
+    // base case
+
+    if(root == NULL) return;
+
+    
+
+    if(root->left != NULL)  mp[root->left] = {root,false};
+
+    if(root->right != NULL) mp[root->right] = {root,false};
+
+    markChildToParent(root->left,mp);
+
+    markChildToParent(root->right,mp);
+
+}  
+
+BinaryTreeNode<int>* FindNode(BinaryTreeNode<int>* root , int start){
+
+    queue<BinaryTreeNode<int>*> q;
+
+    q.push(root);
+
+ 
+
+    while(!q.empty()){
+
+        auto it = q.front();
+
+        q.pop();
+
+ 
+
+        if(it->data == start) return it;
+
+ 
+
+        if(it->left != NULL) q.push(it->left);
+
+        if(it->right != NULL) q.push(it->right);
+
+    }
+
+}  
+
+int timeToBurnTree(BinaryTreeNode<int>* root, int start)
+
+{
+
+    unordered_map<BinaryTreeNode<int>*, pair<BinaryTreeNode<int>*,bool>> mp;
+
+    mp[root] = {NULL,false};
+
+    markChildToParent(root,mp); 
+
+ 
+
+   BinaryTreeNode<int>* target = FindNode(root,start);  
+
+ 
+
+    queue<BinaryTreeNode<int>*> q;
+
+    q.push(target);
+
+    int time = 0;
+
+    mp[target].second = true;  
+
+ 
+
+    while(!q.empty()){
+
+        int n = q.size();
+
+        bool flag = false;  
+
+ 
+
+        while(n != 0){
+
+            auto it = q.front();
+
+            q.pop();
+
+ 
+
+            if(it->left != NULL && mp[it->left].second == false){
+
+                flag = true;
+
+                mp[it->left].second = true;
+
+                q.push(it->left); 
+
+            }
+
+ 
+
+            if(it->right != NULL && mp[it->right].second == false){
+
+                flag = true;
+
+                mp[it->right].second = true;
+
+                q.push(it->right);
+
+            }
+
+ 
+
+            BinaryTreeNode<int>* parent = mp[it].first;
+
+                            if(parent != NULL && mp[parent].second == false){
+
+                flag = true;
+
+                mp[parent].second = true;
+
+                q.push(parent);
+
+            }
+
+            n--;
+
+        }  
+
+        if(flag == true) time++;
+
+    }
+
+    return time;
+
+}
