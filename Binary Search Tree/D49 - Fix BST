@@ -1,0 +1,35 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+TreeNode *first, *last, *mid;
+
+void inorder(TreeNode *root, TreeNode *&prev) {
+  if (!root)
+    return;
+
+  inorder(root->left, prev);
+
+  if (prev->data > root->data) {
+    if (!first) {
+      first = prev;
+      mid = root;
+    } else
+      last = root;
+  }
+
+  prev = root;
+  inorder(root->right, prev);
+}
+
+TreeNode *FixBST(TreeNode *root) {
+  first = last = mid = NULL;
+  TreeNode *prev = new TreeNode(INT_MIN);
+
+  inorder(root, prev);
+  if (first and last)
+    swap(first->data, last->data);
+  else if (first and mid)
+    swap(first->data, mid->data);
+
+  return root;
+}
