@@ -1,0 +1,36 @@
+#include <cstdio>
+#include <iostream>
+
+using namespace std;
+//doesnt use stack implicilty (recusrion) or explicittly
+struct TreeNode {
+  int value;
+  TreeNode *left, *right;
+
+  TreeNode(int val): value(val), left(NULL), right(NULL) {}
+};
+
+void inorder(TreeNode *A) {
+    TreeNode *current = A;
+    while(current != NULL) {
+        if(current->left != NULL) {
+            TreeNode *pred = current->left;
+            while(pred->right != NULL && pred->right != current)
+                pred = pred->right;
+
+            if(pred->right == NULL) { /* Have to process left subtree */
+                pred->right = current;
+                current = current->left;
+            }
+            else {
+                cout << current->value << " "; /* Next smallest */
+                current = current->right;
+                pred->right = NULL; /* Recover tree structure */
+            }
+        }
+        else {
+            cout << current->value << " "; /* Next smallest */
+            current = current->right;
+        }
+    }
+}

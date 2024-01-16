@@ -36,15 +36,15 @@ void inorder(Node* root){
 void preorder(Node* root){
     if(root!=NULL){
         cout<<root->key<<endl;
-        inorder(root->left);
-        inorder(root->right);
+        preorder(root->left);
+        preorder(root->right);
     }
 }
 //Postrder
 void posorder(Node* root){
     if(root!=NULL){
-        inorder(root->left);
-        inorder(root->right);
+        posorder(root->left);
+        posorder(root->right);
         cout<<root->key<<endl;
     }
 }

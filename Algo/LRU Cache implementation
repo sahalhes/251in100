@@ -1,0 +1,70 @@
+#include<bits/stdc++.h>
+
+struct Node {
+    int val, key;
+    Node* next, * prev;
+    Node(int key, int val) {
+        this->val=val;
+        this->key=key;
+        next=prev=NULL;
+    }
+}; 
+class LRUCache {
+private:
+    int cap;
+    unordered_map<int,Node*> cache;
+    Node*head, *tail;
+    void deleteNode(Node* &node){
+        node->prev->next=node->next;
+        node->next->prev=node->prev;
+    }
+    void insertNode(Node* &node){
+           node->next=head->next;
+           node->prev=head;
+           head->next->prev=node;
+           head->next=node;
+    }
+
+public:
+    LRUCache(int capacity) {
+        cap = capacity;
+        head = new Node(-1,-1);
+        tail = new Node(-1,-1);
+        head->next = tail;
+        tail->prev = head;
+
+    }
+    int get(int key) {
+
+        int res=-1;
+        if(!cache.count(key)) 
+            return -1;
+        Node*node = cache[key];
+        res=node->val;
+        deleteNode(node);
+        insertNode(node);
+        return res;
+
+    }
+
+    void put(int key, int value) {
+
+        Node *temp = NULL;
+        if(cache.count(key)){
+            temp = cache[key];
+            deleteNode(temp);
+            temp->val = value;
+            insertNode(temp);
+        }
+
+        else{
+            temp = new Node(key,value);
+            cache[key]=temp;
+            if(cache.size()>cap){
+                cache.erase(tail->prev->key);
+                deleteNode(tail->prev);
+            }
+            insertNode(temp);
+        }
+    }
+};
