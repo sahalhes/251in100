@@ -1,0 +1,32 @@
+#include <bits/stdc++.h> 
+int minCashFlow(vector<vector<int>>& money, int n)
+{
+   // Write your code here.
+   vector<int> arr(n, 0);
+   for(int i=0; i<n; i++){
+      for(int j=0; j<n; j++){
+         arr[i] -= money[i][j]; // Take from ith
+         arr[j] += money[i][j]; // Give it to jth
+
+      }
+
+   }
+
+   int ans = 0;
+   for(int i=0; i<n; i++){
+
+      // Now either calculate total amount that is to be given or taken
+
+      if(arr[i] > 0){
+
+         ans += arr[i];
+
+      }
+
+   }
+
+   return ans;
+
+}
+   
+
