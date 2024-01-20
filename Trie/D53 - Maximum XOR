@@ -1,0 +1,101 @@
+//without trie
+#include<bits/stdc++.h>
+
+int maximumXor(vector<int> A)
+
+{
+    int maxi=INT_MIN;
+    int n=A.size();
+    int i=0;
+    while(i<n)
+
+    {
+        int ele=A[i];
+        for(int j=i+1;j<n;j++)
+        {
+            int xorrr=ele^A[j];
+            maxi=max(maxi,xorrr);
+        }
+        i++;
+    }
+    if(maxi<0) 
+
+    {
+        return 0;
+    }
+
+    return maxi;
+
+}
+
+//with trieclass TrieNode {
+public:
+    vector<TrieNode*> children;
+    bool isTerminal;
+    
+    TrieNode() {
+        children.resize(2, nullptr);
+        isTerminal = false;
+    }
+};
+
+class Trie {
+private:
+    TrieNode* root;
+
+    void insertUtil(TrieNode* root, int ele, int i) {
+        if (!root) return;
+        if (i < 0) {
+            root->isTerminal = true;
+            return;
+        }
+        int bit = (ele >> i) & 1;
+        TrieNode* child;
+        if (root->children[bit] != nullptr) {
+            child = root->children[bit];
+        } else {
+            child = new TrieNode();
+            root->children[bit] = child;
+        }
+        insertUtil(child, ele, i - 1);
+    }
+
+    void findMaxXorUtil(TrieNode* root, int ele, int i, int &maxXor) {
+        if (!root || i < 0) return;
+        int bit = (ele >> i) & 1;
+        TrieNode* child = root->children[bit];
+        if (root->children[1 - bit] != nullptr) {
+            child = root->children[1 - bit];
+            maxXor |= (1 << i);
+        }
+        findMaxXorUtil(child, ele, i - 1, maxXor);
+    }
+
+public:
+    Trie() {
+        root = new TrieNode();
+    }
+
+    void insertEle(int ele) {
+        insertUtil(root, ele, 31);
+    }
+
+    int findMaxXor(int ele) {
+        int maxXor = 0;
+        findMaxXorUtil(root, ele, 31, maxXor);
+        return maxXor;
+    }
+};
+
+int maximumXor(vector<int> A) {
+    Trie* trie = new Trie();
+    for (int i = 0; i < A.size(); i++) {
+        trie->insertEle(A[i]);
+    }
+    int maximumXor = 0;
+
+    for (int i = 0; i < A.size(); i++) {
+        maximumXor = max(maximumXor, trie->findMaxXor(A[i]));
+    }
+    return maximumXor;
+}
