@@ -1,0 +1,53 @@
+//brute force
+#include <bits/stdc++.h> 
+vector<int> findAnagramsIndices(string str, string ptn, int n, int m)
+{
+    // Write you code here.
+    vector<int> ans;
+    map<char,int> hash1;
+    map<char,int> hash2;
+
+    for(int i=0;i<=n-m;i++){
+        hash1.clear();
+        hash2.clear();
+        for(int j=i;j<i+m;j++){
+            hash1[str[j]]++;
+            hash2[ptn[j-i]]++;
+        }
+        if(hash1==hash2) ans.push_back(i);
+    }
+    return ans;
+}
+
+//optimal
+#include<bits/stdc++.h>
+vector<int> findAnagramsIndices(string str, string sub, int n, int m)
+{
+    map<char,int> map1;
+    map<char,int> map2;
+    vector<int> ans;
+    int i;
+    for (i = 0; i < sub.length(); i++) 
+    {
+        map1[sub[i]]++;
+        map2[str[i]]++;
+    }
+    if(map1==map2)
+        ans.push_back(0);
+    for(int j=0; j<str.length(); j++)
+    {
+        if(i<str.length())
+        {
+            map2[str[j]]--;
+            if(map2[str[j]]==0)
+                map2.erase(str[j]);            
+            map2[str[i]]++;           
+            if(map1==map2)
+                ans.push_back(j+1);
+            i++;    
+        }
+        else
+            break;
+    }
+    return ans;
+}
