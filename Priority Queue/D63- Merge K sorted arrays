@@ -1,0 +1,45 @@
+#include <bits/stdc++.h> 
+vector<int> mergeKSortedArrays(vector<vector<int>>&kArrays, int k)
+{
+    // Write your code here.
+
+     vector<int> ans;
+
+    for(int i=0;i<k;i++){
+        for(int j=0;j<kArrays[i].size();j++){
+            ans.push_back(kArrays[i][j]);
+        }
+    }
+    sort(ans.begin(),ans.end());
+
+     return ans;
+}
+
+
+//heaps
+#include <bits/stdc++.h> 
+vector<int> mergeKSortedArrays(vector<vector<int>>&kArrays, int k)
+{
+    // Write your code here.
+
+    vector<int>ans;
+    priority_queue<pair<int,pair<int,int>>,vector<pair<int,pair<int,int>>>,greater<pair<int,pair<int,int>>>>pq;
+
+    for(int i=0;i<k;i++){
+      pq.push({kArrays[i][0], {i, 0}});
+    }
+
+    while(!pq.empty()){
+        pair<int,pair<int,int>>temp=pq.top();
+        pq.pop();
+        ans.push_back(temp.first); 
+        int i = temp.second.first;
+        int j = temp.second.second; 
+        if(j+1<kArrays[i].size()){
+          pq.push({kArrays[i][j + 1], {i, j + 1}});
+        }
+    }
+
+    return ans;
+}
+//priority pipii , vec pipii , greater pipii 
