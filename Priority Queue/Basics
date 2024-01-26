@@ -1,0 +1,16 @@
+
+//heap is like sorted array minh or maxh 
+// parent = (i-1)/2                                    0
+//left = 2i+1 , right = 2i+2                         1   2
+//                                                 3  4 5  6
+void heapify(int i){ //this is minheapify
+    int li=left(i) , ri = right(i);
+    int smallest =i;
+
+    if(li<size && arr[li]<arr[smallest]) smallest=li;
+    if(ri<size && arr[ri]<arr[smallest]) smallest=ri;
+    if(smallest!=i){
+        swap(arr[i],arr[smallest]);
+        heapify(smallest);
+    }
+}
