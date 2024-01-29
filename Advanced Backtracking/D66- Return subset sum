@@ -6,7 +6,7 @@ void solve(vector<int> &arr,vector<vector<int>> &ans,vector<int> &temp,int sum,i
     for(int i=index;i<n;i++){
         temp.push_back(arr[i]);
         solve(arr,ans,temp,sum+arr[i],i+1,n,k);
-        temp.pop_back(); //
+        temp.pop_back(); // for backtrack
     }
 }
 
