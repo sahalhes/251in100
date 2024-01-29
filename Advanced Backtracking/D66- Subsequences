@@ -1,0 +1,26 @@
+#include <bits/stdc++.h> 
+
+void solve(vector<string> &ans,string str,string output,int index){
+	
+	if(index>=str.length()){
+		if(output.length()>0) ans.push_back(output);
+		return;
+	}
+	solve(ans,str,output,index+1);
+
+	char ele=str[index];
+	output.push_back(ele);
+
+	solve(ans,str,output,index+1);
+}
+
+vector<string> subsequences(string str){
+	
+	// Write your code here
+	vector<string> ans;
+	int index=0;
+	string output="";
+	solve(ans,str,output,index);
+	return ans;
+	
+}
