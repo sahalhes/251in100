@@ -1,0 +1,35 @@
+int minSteps(pair<int, int> knightPosition, pair<int, int> targetPosition, int size) {
+
+    int x1= knightPosition.first;
+    int y1=knightPosition.second;
+    int x2=targetPosition.first;
+    int y2= targetPosition.second;
+ 
+    if(x1==x2 && y1==y2)return 0;
+    queue<pair<int ,int>>q;
+    q.push({x1-1,y1-1}); 
+    int a[size][size];
+    for(int i=0;i<size;i++)
+    for(int j=0;j<size;j++)
+    a[i][j]=0;
+
+    int row[]={1,2,1,2,-1,-2,-1,-2};
+
+    int col[]={2,1,-2,-1,2,1,-2,-1};
+    while(!q.empty()){
+        int x=q.front().first;
+        int y=q.front().second;
+        q.pop();
+        for(int i=0;i<8;i++){
+            int nx= x+ row[i];
+            int ny= y+ col[i];
+            if(nx<0 || nx>=size ||ny<0 || ny>=size || a[nx][ny]!=0)continue;
+            a[nx][ny]=1+ a[x][y];
+            q.push({nx,ny});
+        }
+    }
+
+    return a[x2-1][y2-1];
+
+}
+
