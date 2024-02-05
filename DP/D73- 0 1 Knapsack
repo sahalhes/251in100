@@ -1,0 +1,12 @@
+int maxProfit(vector<int> &values, vector<int> &weights, int n, int w)
+{
+	// Write your code here
+	vector<int> dp(w+1,0);
+	for(int i=0;i<n;i++){
+		for(int curr=w;curr>=0;curr--){
+			if(curr-weights[i] >= 0) 
+			dp[curr] = max(dp[curr],values[i]+dp[curr-weights[i]]);
+		}
+	}
+	return dp[w];
+}
