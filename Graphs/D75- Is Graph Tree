@@ -1,0 +1,9 @@
+#include <bits/stdc++.h> 
+bool isGraphTree(int n, vector<vector<int>> &edgeList)
+{
+	// Write your code here
+	// graph = tree if nodes = edges+1
+	int m = edgeList.size();
+	if(n==m+1) return true;
+	return false;
+}
