@@ -1,0 +1,14 @@
+vector<long long int> dp(100001,-1);
+class Solution {
+  public:
+    int mod=1000000007;
+    int nthFibonacci(int n){
+        // code here
+        if(dp[n]!=-1) return dp[n];
+        if(n<=1) {
+            return dp[n]=n; // first store then return;
+        };
+        
+        return dp[n]=(nthFibonacci(n-1)+nthFibonacci(n-2))%mod;
+    }
+};

@@ -10,7 +10,6 @@ void helper(int n,int s,int a,int d,vector<vector<int>>&ans){
 {
 
     //    Write your code here.
-
     vector<vector<int>>ans;
      helper(n,1,2,3,ans);
      return ans;
@@ -19,3 +18,21 @@ void helper(int n,int s,int a,int d,vector<vector<int>>&ans){
 //s sourcerod a auxrod d destinationrod
 // (s a d)
 // n-1 s d a -> ans.push -> a s d
+
+//RC Solution
+long long cnt=0;
+void TOHHelper(int N, int from,int to, int aux){
+    if(N>0){
+        TOHHelper(N-1,from,aux,to);
+        cout<<"move disk "<< N <<" from rod "<< from << " to rod "<<to<<endl;
+        cnt++;
+        TOHHelper(N-1,aux,to,from);
+    }
+    }
+long long toh(int N, int from,int to, int aux) {
+    // Your code here
+    
+    TOHHelper(N,from,to,aux);
+    return cnt;
+    
+}
