@@ -1,0 +1,51 @@
+#include <bits/stdc++.h>
+bool check(int node, vector<int>adj[], int color[])
+{
+	queue<int>q;
+	q.push(node);
+	color[node] = 0;
+
+	while(!q.empty())
+	{
+		int n = q.front();
+		q.pop();
+		for(auto adjnode:adj[n])
+		{
+			if(color[adjnode] == -1)
+			{
+				color[adjnode] = !color[n];
+				q.push(adjnode);
+			}
+			else if(color[adjnode] == color[n])
+			    return false;
+		}
+	}
+	return true;
+}
+bool isGraphBirpatite(vector<vector<int>> &edges) {
+	int V = edges.size();
+	vector<int> adj[V];
+	for(int i = 0; i < V; i++)
+	{
+		for(int j = 0; j < V; j++)
+		{
+			if(edges[i][j] == 1 && i != j)
+			{
+				adj[i].push_back(j);
+				adj[j].push_back(i);
+			}
+		}
+	}
+	int color[V];
+	for(int i = 0; i < V; i++)  color[i]=-1;
+
+	for(int i = 0; i < V; i++)
+	{
+		if(color[i] == -1)
+		{
+			if(check(i,adj,color) == false)
+			    return false;
+		}
+	}
+	return true;
+}
