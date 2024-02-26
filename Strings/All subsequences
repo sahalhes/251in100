@@ -1,0 +1,21 @@
+void gen(string s, int index, string current, vector<string>& result) {
+        int n = s.length();
+        if (index == n) {
+            if (!current.empty()) {
+                result.push_back(current);
+            }
+            return;
+        }
+
+        gen(s, index + 1, current + s[index], result);
+        gen(s, index + 1, current, result);
+    }
+
+    vector<string> AllPossibleStrings(string s){
+        vector<string> result;
+        gen(s, 0, "", result);
+
+        sort(result.begin(), result.end());
+
+        return result;
+    }
