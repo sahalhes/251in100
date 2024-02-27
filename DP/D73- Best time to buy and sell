@@ -16,3 +16,15 @@ int maxProfit(vector<int>& prices) {
     }
     return max({dp[0][0], dp[1][0], dp[2][0]});
 }
+
+//with fee and mulltiple transaction 
+ int maxProfit(vector<int>& prices, int fee) {
+        int t1 = 0 , t2=INT_MIN;
+
+        for(int price:prices){
+            int t1_old = t1;
+            t1 = max(t1,t2+price);
+            t2 = max(t2,t1-price-fee);
+        }
+        return t1;
+    }
