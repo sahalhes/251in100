@@ -1,0 +1,11 @@
+static bool cmp(string a,string b){
+	    return a+b>b+a; // 3,9 it will sort as 9 3 as 39>93 is false it will swap
+	}
+	
+	string printLargest(int n, vector<string> &arr) {
+	    sort(arr.begin() , arr.end(), cmp);
+	    string ans = "";
+	    
+	    for(auto it:arr) ans += it;
+	    return ans;
+	}
