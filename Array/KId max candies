@@ -1,0 +1,35 @@
+bool ismax(vector<int>& candies,int x){
+        for(int i=0;i<candies.size();i++){
+            if(candies[i]>x) return false;
+        }
+        return true;
+    }
+    vector<bool> kidsWithCandies(vector<int>& candies, int extraCandies) {
+        int n = candies.size();
+        vector<bool> ans(n);
+        for(int i=0;i<n;i++){
+            candies[i] += extraCandies;
+            ans[i] = ismax(candies,candies[i]);
+            candies[i] -= extraCandies;
+        }
+        return ans;
+    }
+
+//greedy
+vector<bool> kidsWithCandies(vector<int>& candies, int extraCandies) {
+        int n = candies.size();
+        vector<bool> ans;
+        int maxCandies = INT_MIN;
+        for(int i=0;i<n;i++) {
+            maxCandies = max(maxCandies, candies[i]);
+        }
+        for(int i=0;i<n;i++) {
+            int total = candies[i] + extraCandies;
+            if(total >= maxCandies) {
+                ans.push_back(true);
+            } else {
+                ans.push_back(false);
+            }
+        }
+        return ans;
+    }
