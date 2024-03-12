@@ -1,0 +1,12 @@
+long long power(long long num, long long n, long long mod)
+{
+   long long ANS = 1LL;
+   while (b)
+   {
+      if (b & 1)
+         ANS = (ANS * 1LL * num) % mod;
+      num = (num * 1LL * num) % mod;
+      b >>= 1;
+   }
+   return ANS;
+}
