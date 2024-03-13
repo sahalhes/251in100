@@ -1,0 +1,7 @@
+//Used to find Best subset 
+// Static  , Dynamic
+// To slide arr[i+k]-arr[i]+sum to slide , simple subtract curr-=arr[i-(k-1)] before exiting loop with condition when i>=k-1
+/* Static - max of subarray sum with sike k 
+    Dynamic - smallest>= some sum
+    String permutation
+ */ 

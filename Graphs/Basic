@@ -1,0 +1,15 @@
+
+void add(vector<int>adj[],int u,int v){
+    adj[u].push_back(v);
+    adj[v].push_back(u); //for undirected graph
+}
+
+
+int main(){
+    int v=u;
+    vector<int>adj[v]; // vector array
+    add(adj,0,1);
+    add(adj,0,2);
+    add(adj,1,2);
+    add(adj,2,3);
+}

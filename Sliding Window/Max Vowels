@@ -1,0 +1,34 @@
+//Brute
+int maxVowels(string s, int k) {
+        int ans=0;
+        for(int i=0;i<=s.length()-k;i++){
+            int curr=0;
+            for(int j=i;j<i+k;j++){
+                if(s[j]=='a' || s[j]=='e' || s[j]=='i' ||  s[j]=='o' || s[j]=='u') curr++;
+            }
+            ans = max(ans,curr);
+        }
+        return ans;
+    }
+
+//Optimal
+ int maxVowels(string s, int k) {
+        int a=0,j=k; //first pointer and end pointer
+        int cnt=0;
+        for(int i=0;i<k;i++){
+           if(s[i]=='a' || s[i]=='e' || s[i]=='i' || s[i]=='o' || s[i]=='u') cnt++;
+        }
+        
+        if(cnt==k) return cnt;
+        int ans=cnt;
+        
+        while(j<s.size()){
+            if(s[a]=='a' || s[a]=='e' || s[a]=='i' || s[a]=='o' || s[a]=='u') cnt--;
+            a++;
+            if(s[j]=='a' || s[j]=='e' || s[j]=='i' || s[j]=='o' || s[j]=='u') cnt++;
+            j++;
+            ans = max(ans,cnt);
+        }
+
+        return ans;
+    }
