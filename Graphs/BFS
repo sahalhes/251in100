@@ -1,0 +1,47 @@
+ void BFS(vector<int>adj[],int v,int s){
+    vector<bool>visited(v,false); //s is source
+    queue<int>q;//fifo
+    visited[s]=true;
+    q.push(s);
+
+    while (!q.empty())
+    {
+        int u=q.front();
+        q.pop();
+        cout<<u<<" ";
+
+        for(int v:adj[u]){
+            if(visited[v]==false){
+                visited[v]=true;
+                q.push(v);
+            }
+        }
+    }
+    
+ }
+
+
+ //vector form
+  vector<int> bfsOfGraph(int v, vector<int> adj[]) {
+    vector<bool> visited(v, false); // Mark all vertices as not visited
+
+    vector<int> ans;
+    queue<int> q;
+    visited[0] = true; // Mark first node as visited
+    q.push(0); // Push first node into queue
+
+    while (!q.empty()) {
+        int u = q.front();
+        q.pop();
+        ans.push_back(u); // Push current node into result
+
+        // Traverse all adjacent vertices of u
+        for (int vertex : adj[u]) {
+            if (!visited[vertex]) {
+                visited[vertex] = true; // Mark visited
+                q.push(vertex); // Push into queue
+            }
+        }
+    }
+    return ans;
+}
