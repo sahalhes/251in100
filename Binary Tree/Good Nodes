@@ -1,0 +1,17 @@
+int ans=0;
+    void inorder(TreeNode* root, int currMax){
+        if(!root) return;
+        
+        if(root->val>=currMax){
+            ans++;
+            currMax=root->val;
+        }
+        inorder(root->left,currMax);
+        inorder(root->right,currMax);
+
+    }
+
+    int goodNodes(TreeNode* root) {
+        inorder(root,root->val);
+        return ans;
+    }
