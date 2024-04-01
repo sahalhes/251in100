@@ -1,0 +1,16 @@
+int ans=INT_MAX;
+    Node* p= NULL;
+    void func(Node* root){
+        if(!root) return;
+        func(root->left);
+        if(p) ans = min(ans,root->data-p->data);
+        p=root;
+        func(root->right);
+    }    
+    
+    int absolute_diff(Node *root)
+    {
+        //Your code here
+        func(root);
+        return ans;
+    }

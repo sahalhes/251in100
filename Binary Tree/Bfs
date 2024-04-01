@@ -1,0 +1,14 @@
+void bfs(Node* root){
+    if(!root) return;
+    vector<int> ans;
+    queue<Node*> q;
+    q.push(root);
+
+    while(!q.empty()){
+        Node* curr = q.front();
+        ans.push_back(curr->data);
+        if(curr->left) q.push(curr->left);
+        if(curr->right) q.push(curr->right);
+        q.pop();
+    }
+}
